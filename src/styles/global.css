@@ -9,8 +9,141 @@
   html {
     @apply font-cardo text-black bg-white;
   }
+
+  body {
+    @apply leading-relaxed;
+  }
   
   h1, h2, h3, h4, h5, h6 {
     @apply font-light tracking-wide text-black;
   }
+
+  a,
+  button,
+  input,
+  textarea,
+  select {
+    @apply rounded-sm;
+  }
+
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 3px solid #111827;
+    outline-offset: 4px;
+  }
+
+  ::selection {
+    background: #111827;
+    color: #ffffff;
+  }
+}
+
+.skip-link {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  border-radius: 9999px;
+  background: #111827;
+  color: #ffffff;
+  transform: translateY(-160%);
+  transition: transform 0.2s ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.asw-container .asw-menu-btn {
+  background: #111111 !important;
+  border: 4px solid #111111 !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2) !important;
+  outline: none !important;
+}
+
+.asw-container [class*="menu-btn"],
+.asw-container [class*="menu-btn"]::before,
+.asw-container [class*="menu-btn"]::after,
+.asw-container [class*="button"]::before,
+.asw-container [class*="button"]::after {
+  background: #111111 !important;
+  border-color: #111111 !important;
+  outline: none !important;
+}
+
+.asw-container [class*="menu-btn"] {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2) !important;
+}
+
+.asw-container .asw-menu-btn svg,
+.asw-container .asw-menu-btn img {
+  filter: brightness(0) invert(1) !important;
+}
+
+.asw-container .asw-menu {
+  background: #ffffff !important;
+  color: #111111 !important;
+}
+
+.asw-container .asw-menu * {
+  color: #111111 !important;
+}
+
+.asw-container .asw-menu [class*="header"],
+.asw-container .asw-menu [class*="top"],
+.asw-container .asw-menu [class*="bar"] {
+  background: #111111 !important;
+  color: #ffffff !important;
+}
+
+.asw-container .asw-menu [class*="header"] *,
+.asw-container .asw-menu [class*="top"] *,
+.asw-container .asw-menu [class*="bar"] * {
+  color: #ffffff !important;
+}
+
+.asw-container .asw-menu select,
+.asw-container .asw-menu option,
+.asw-container .asw-menu button,
+.asw-container .asw-menu input,
+.asw-container .asw-menu .asw-btn,
+.asw-container .asw-menu [class*="card"],
+.asw-container .asw-menu [class*="item"],
+.asw-container .asw-menu [class*="box"] {
+  background: #ffffff !important;
+  color: #111111 !important;
+  border-color: rgba(17, 17, 17, 0.12) !important;
+}
+
+.asw-container .asw-menu .asw-selected {
+  background: #111111 !important;
+  color: #ffffff !important;
+}
+
+.asw-container .asw-menu .asw-selected * {
+  color: #ffffff !important;
+}
+
+.asw-container .asw-menu svg {
+  color: currentColor !important;
+  fill: currentColor !important;
 }

@@ -6,7 +6,10 @@ interface Props {
 	description?: string;
 }
 
-const { title, description = "Alma - Architecture & Interior Design" } = Astro.props;
+const {
+	title,
+	description = 'עלמא - אדריכלות ועיצוב פנים',
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -14,19 +17,26 @@ const { title, description = "Alma - Architecture & Interior Design" } = Astro.p
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#fcfcfc" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-        
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-        
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&display=swap"
+			rel="stylesheet"
+		/>
+		<script
+			src="https://cdn.jsdelivr.net/npm/sienna-accessibility@latest/dist/sienna-accessibility.umd.js"
+			defer
+		></script>
+
 		<title>{title}</title>
 	</head>
 	<body class="bg-[#fcfcfc] text-berger-brown min-h-screen flex flex-col antialiased">
+		<a class="skip-link" href="#main-content">דלגו לתוכן הראשי</a>
 		<slot />
 	</body>
 </html>
-

@@ -1,87 +1,176 @@
 ---
+const isHomePage = Astro.url.pathname === '/';
+
+const navLinks = [
+  { href: isHomePage ? '#about' : '/#about', label: 'אודות' },
+  { href: isHomePage ? '#portfolio' : '/#portfolio', label: 'פורטפוליו' },
+  { href: isHomePage ? '#services' : '/#services', label: 'שירותים' },
+  { href: isHomePage ? '#contact' : '/#contact', label: 'צור קשר' },
+];
 ---
-<nav class="w-full py-6 px-8 md:px-16 flex justify-between items-center fixed top-0 z-50 mix-blend-difference text-white transition-all duration-500" id="navbar">
-  <!-- Logo -->
-  <a href="#home" class="group relative z-50">
+
+<nav
+  class="w-full py-6 px-8 md:px-16 flex justify-between items-center fixed top-0 z-50 mix-blend-difference text-white transition-all duration-500"
+  id="navbar"
+  aria-label="ניווט ראשי"
+>
+  <a
+    href={isHomePage ? '#home' : '/#home'}
+    class="group relative z-50"
+    aria-label="עלמא - חזרה לתחילת העמוד"
+  >
     <div class="flex items-center" dir="rtl">
-      <div class="text-3xl font-bold tracking-tighter">
-        עלמא.
-      </div>
+      <div class="text-3xl font-bold tracking-tighter">עלמא.</div>
     </div>
   </a>
 
-  <!-- Desktop Menu -->
-  <div class="hidden md:flex gap-12 text-sm font-medium tracking-[0.2em] uppercase">
-    <a href="#about" class="nav-link relative overflow-hidden group">
-      <span class="block transition-transform duration-500 group-hover:-translate-y-full">אודות</span>
-      <span class="absolute top-0 left-0 block transition-transform duration-500 translate-y-full group-hover:translate-y-0 opacity-50">אודות</span>
-    </a>
-    <a href="#portfolio" class="nav-link relative overflow-hidden group">
-      <span class="block transition-transform duration-500 group-hover:-translate-y-full">פורטפוליו</span>
-      <span class="absolute top-0 left-0 block transition-transform duration-500 translate-y-full group-hover:translate-y-0 opacity-50">פורטפוליו</span>
-    </a>
-    <a href="#services" class="nav-link relative overflow-hidden group">
-      <span class="block transition-transform duration-500 group-hover:-translate-y-full">שירותים</span>
-      <span class="absolute top-0 left-0 block transition-transform duration-500 translate-y-full group-hover:translate-y-0 opacity-50">שירותים</span>
-    </a>
-    <a href="#contact" class="nav-link relative overflow-hidden group">
-      <span class="block transition-transform duration-500 group-hover:-translate-y-full">צור קשר</span>
-      <span class="absolute top-0 left-0 block transition-transform duration-500 translate-y-full group-hover:translate-y-0 opacity-50">צור קשר</span>
-    </a>
-  </div>
+  <ul class="hidden md:flex items-center gap-12 text-sm font-medium tracking-[0.12em] list-none m-0 p-0" role="list">
+    {navLinks.map((link) => (
+      <li>
+        <a href={link.href} class="nav-link inline-block hover:opacity-70 transition-opacity duration-300">
+          {link.label}
+        </a>
+      </li>
+    ))}
+  </ul>
 
-  <!-- Mobile Menu Button -->
-  <button class="md:hidden relative z-50 w-10 h-10 flex flex-col justify-center gap-2 group" aria-label="Menu" id="menu-btn">
+  <button
+    type="button"
+    class="md:hidden relative z-50 w-10 h-10 flex flex-col justify-center gap-2 group"
+    aria-label="פתיחת תפריט ראשי"
+    aria-controls="mobile-menu"
+    aria-expanded="false"
+    id="menu-btn"
+  >
+    <span class="sr-only">פתיחת תפריט</span>
     <span class="w-full h-[1px] bg-current transition-all duration-300 origin-center"></span>
     <span class="w-full h-[1px] bg-current transition-all duration-300 origin-center"></span>
   </button>
 </nav>
 
-<!-- Mobile Menu Overlay -->
-<div id="mobile-menu" class="fixed inset-0 bg-black z-40 translate-x-full transition-transform duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] flex items-center justify-center">
-    <div class="flex flex-col gap-8 text-4xl font-light text-white text-center">
-        <a href="#about" class="mobile-link hover:opacity-50 transition-opacity">אודות</a>
-        <a href="#portfolio" class="mobile-link hover:opacity-50 transition-opacity">פורטפוליו</a>
-        <a href="#services" class="mobile-link hover:opacity-50 transition-opacity">שירותים</a>
-        <a href="#contact" class="mobile-link hover:opacity-50 transition-opacity">צור קשר</a>
-    </div>
+<div
+  id="mobile-menu"
+  class="fixed inset-0 bg-black z-40 translate-x-full transition-transform duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] flex items-center justify-center"
+  aria-hidden="true"
+>
+  <nav aria-label="ניווט נייד">
+    <ul class="flex flex-col gap-8 text-4xl font-light text-white text-center list-none m-0 p-0" role="list">
+      {navLinks.map((link) => (
+        <li>
+          <a href={link.href} class="mobile-link hover:opacity-70 transition-opacity">
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
 </div>
 
 <script>
-    const menuBtn = document.getElementById('menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const links = document.querySelectorAll('.mobile-link');
-    const spans = menuBtn?.querySelectorAll('span');
-    let isOpen = false;
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const links = Array.from(document.querySelectorAll('.mobile-link'));
+  const spans = menuBtn?.querySelectorAll('span:not(.sr-only)');
+  const focusableSelector =
+    'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
+  let isOpen = false;
+  let lastFocusedElement = null;
 
-    function toggleMenu() {
-        isOpen = !isOpen;
-        if (isOpen) {
-            mobileMenu?.classList.remove('translate-x-full');
-            document.body.classList.add('overflow-hidden');
-            spans?.[0].classList.add('rotate-45', 'translate-y-[4.5px]');
-            spans?.[1].classList.add('-rotate-45', '-translate-y-[4.5px]');
-        } else {
-            mobileMenu?.classList.add('translate-x-full');
-            document.body.classList.remove('overflow-hidden');
-            spans?.[0].classList.remove('rotate-45', 'translate-y-[4.5px]');
-            spans?.[1].classList.remove('-rotate-45', '-translate-y-[4.5px]');
-        }
+  function setMenuState(open) {
+    isOpen = open;
+
+    if (!menuBtn || !mobileMenu) {
+      return;
     }
 
-    menuBtn?.addEventListener('click', toggleMenu);
-    links.forEach(link => link.addEventListener('click', toggleMenu));
+    menuBtn.setAttribute('aria-expanded', String(open));
+    menuBtn.setAttribute('aria-label', open ? 'סגירת תפריט ראשי' : 'פתיחת תפריט ראשי');
+    mobileMenu.setAttribute('aria-hidden', String(!open));
 
-    // Navbar scroll effect
-    window.addEventListener('scroll', () => {
-        const nav = document.getElementById('navbar');
-        // Trigger solid white navbar once past the hero section
-        if (window.scrollY > window.innerHeight - 80) {
-            nav?.classList.add('py-4', 'bg-white', 'text-black');
-            nav?.classList.remove('py-6', 'mix-blend-difference', 'text-white');
-        } else {
-            nav?.classList.add('py-6', 'mix-blend-difference', 'text-white');
-            nav?.classList.remove('py-4', 'bg-white', 'text-black');
-        }
-    });
+    if (open) {
+      mobileMenu.classList.remove('translate-x-full');
+      document.body.classList.add('overflow-hidden');
+      spans?.[0]?.classList.add('rotate-45', 'translate-y-[4.5px]');
+      spans?.[1]?.classList.add('-rotate-45', '-translate-y-[4.5px]');
+      lastFocusedElement = document.activeElement;
+      const firstFocusable = mobileMenu.querySelector(focusableSelector);
+      if (firstFocusable instanceof HTMLElement) {
+        firstFocusable.focus();
+      }
+      return;
+    }
+
+    mobileMenu.classList.add('translate-x-full');
+    document.body.classList.remove('overflow-hidden');
+    spans?.[0]?.classList.remove('rotate-45', 'translate-y-[4.5px]');
+    spans?.[1]?.classList.remove('-rotate-45', '-translate-y-[4.5px]');
+    if (lastFocusedElement instanceof HTMLElement) {
+      lastFocusedElement.focus();
+    }
+  }
+
+  function toggleMenu() {
+    setMenuState(!isOpen);
+  }
+
+  function handleKeydown(event) {
+    if (!isOpen || !mobileMenu) {
+      return;
+    }
+
+    if (event.key === 'Escape') {
+      setMenuState(false);
+      return;
+    }
+
+    if (event.key !== 'Tab') {
+      return;
+    }
+
+    const focusableItems = Array.from(mobileMenu.querySelectorAll(focusableSelector)).filter(
+      (element) => element instanceof HTMLElement && !element.hasAttribute('disabled'),
+    );
+
+    if (focusableItems.length === 0) {
+      return;
+    }
+
+    const firstElement = focusableItems[0];
+    const lastElement = focusableItems[focusableItems.length - 1];
+
+    if (event.shiftKey && document.activeElement === firstElement) {
+      event.preventDefault();
+      lastElement.focus();
+    } else if (!event.shiftKey && document.activeElement === lastElement) {
+      event.preventDefault();
+      firstElement.focus();
+    }
+  }
+
+  menuBtn?.addEventListener('click', toggleMenu);
+  links.forEach((link) =>
+    link.addEventListener('click', () => {
+      setMenuState(false);
+    }),
+  );
+  document.addEventListener('keydown', handleKeydown);
+
+  window.addEventListener(
+    'scroll',
+    () => {
+      const nav = document.getElementById('navbar');
+      if (!nav || isOpen) {
+        return;
+      }
+
+      if (window.scrollY > window.innerHeight - 80) {
+        nav.classList.add('py-4', 'bg-white', 'text-black');
+        nav.classList.remove('py-6', 'mix-blend-difference', 'text-white');
+      } else {
+        nav.classList.add('py-6', 'mix-blend-difference', 'text-white');
+        nav.classList.remove('py-4', 'bg-white', 'text-black');
+      }
+    },
+    { passive: true },
+  );
 </script>

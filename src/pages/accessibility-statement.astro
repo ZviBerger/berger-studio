@@ -1,0 +1,93 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const lastUpdated = '03.04.2026';
+---
+
+<Layout
+  title="הצהרת נגישות | עלמא"
+  description="הצהרת הנגישות של סטודיו עלמא, כולל פרטי קשר לפניות נגישות ופירוט ההתאמות שבוצעו באתר."
+>
+  <Navbar />
+
+  <main id="main-content" tabindex="-1" class="pt-28 pb-20 px-6 md:px-12">
+    <div class="max-w-4xl mx-auto">
+      <header class="mb-12 border-b border-black/10 pb-8">
+        <p class="text-sm tracking-[0.2em] uppercase text-stone-600 mb-4">Accessibility Statement</p>
+        <h1 class="text-4xl md:text-6xl mb-6">הצהרת נגישות</h1>
+        <p class="text-lg text-stone-800">
+          סטודיו עלמא פועל כדי לאפשר חוויית גלישה מכבדת, ברורה ונוחה ככל האפשר גם לאנשים עם
+          מוגבלות.
+        </p>
+      </header>
+
+      <section class="space-y-6 mb-12" aria-labelledby="legal-basis">
+        <h2 id="legal-basis" class="text-2xl md:text-3xl">הבסיס להנגשת האתר</h2>
+        <p class="text-lg text-stone-800">
+          האתר עודכן בהתאם לעקרונות הנגישות המקובלים בישראל, ובפרט לפי תקנות שוויון זכויות לאנשים
+          עם מוגבלות (התאמות נגישות לשירות), תשע"ג-2013, והתקן הישראלי ת"י 5568 המבוסס על
+          WCAG 2.0 ברמת AA.
+        </p>
+        <p class="text-lg text-stone-800">
+          מאחר שאתרי אינטרנט הם סביבות דינמיות, ייתכן שחלקים מסוימים עדיין ידרשו שיפור או התאמה
+          נוספת. אם נתקלתם בקושי, נשמח לדעת ולטפל בכך במהירות.
+        </p>
+      </section>
+
+      <section class="space-y-6 mb-12" aria-labelledby="site-adjustments">
+        <h2 id="site-adjustments" class="text-2xl md:text-3xl">התאמות נגישות שבוצעו באתר</h2>
+        <ul class="list-disc pr-6 space-y-3 text-lg text-stone-800">
+          <li>הוספת קישור "דלגו לתוכן הראשי" לניווט מהיר באמצעות מקלדת.</li>
+          <li>שיפור הניווט הראשי והניווט הנייד עם תמיכה ב-Tab, ב-Escape ובחיווי פתיחה/סגירה.</li>
+          <li>חיזוק נראות הפוקוס עבור קישורים, כפתורים ושדות טופס.</li>
+          <li>שיפור ניגודיות הטקסט באזורים מרכזיים באתר.</li>
+          <li>הוספת טקסט חלופי לתמונות תוכן וסימון תמונות דקורטיביות כתמונות דקורטיביות.</li>
+          <li>הוספת תוויות ברורות לשדות הטופס במקום הסתמכות על placeholder בלבד.</li>
+          <li>התאמת אנימציות ותנועות למשתמשים שמעדיפים צמצום תנועה.</li>
+          <li>שימוש במבנה סמנטי ברור של כותרות, אזורי תוכן, טפסים וניווט.</li>
+        </ul>
+      </section>
+
+      <section class="space-y-6 mb-12" aria-labelledby="widget-info">
+        <h2 id="widget-info" class="text-2xl md:text-3xl">רכיב עזר לנגישות</h2>
+        <p class="text-lg text-stone-800">
+          באתר משולב רכיב עזר לנגישות שמאפשר פעולות כמו התאמות תצוגה ושיפור קריאות. רכיב זה נועד
+          לסייע למשתמשים, אך הוא אינו מחליף הנגשה מובנית בקוד האתר ואינו מהווה בפני עצמו אישור
+          לעמידה בדרישות הדין.
+        </p>
+      </section>
+
+      <section class="space-y-6 mb-12" aria-labelledby="compatibility">
+        <h2 id="compatibility" class="text-2xl md:text-3xl">תאימות ושימוש</h2>
+        <p class="text-lg text-stone-800">
+          האתר נבנה כך שיתמוך בגלישה באמצעות מקלדת, ניווט בעברית מימין לשמאל, ושימוש בדפדפנים
+          מודרניים נפוצים במחשבים ובמכשירים ניידים.
+        </p>
+      </section>
+
+      <section class="space-y-6 mb-12" aria-labelledby="accessibility-contact">
+        <h2 id="accessibility-contact" class="text-2xl md:text-3xl">פניות בנושא נגישות</h2>
+        <p class="text-lg text-stone-800">
+          אם נתקלתם בבעיה, אם יש תוכן שלא נגיש עבורכם, או אם אתם זקוקים לעזרה נוספת, אפשר לפנות
+          אלינו ונשתדל לספק מענה מתאים בהקדם.
+        </p>
+        <div class="rounded-2xl border border-black/10 p-6 space-y-3 text-lg text-stone-800">
+          <p>
+            דוא"ל:
+            <a href="mailto:Chila.eh@gmail.com" class="underline" dir="ltr">Chila.eh@gmail.com</a>
+          </p>
+          <p>
+            טלפון:
+            <a href="tel:+972543395560" class="underline" dir="ltr">054-339-5560</a>
+          </p>
+          <p>כתובת: יונתן 10, נווה שמיר, בית שמש</p>
+          <p>מועד עדכון אחרון של ההצהרה: {lastUpdated}</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
