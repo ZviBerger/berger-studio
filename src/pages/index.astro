@@ -8,7 +8,7 @@ const allProjects = await getCollection('portfolio');
 const featuredProjects = allProjects.filter(p => p.data.featured);
 ---
 
-<Layout title="Berger Studio | Architecture & Design">
+<Layout title="Alma | Architecture & Design">
 	<Navbar />
 	
 	<main class="bg-white text-black selection:bg-black selection:text-white">
@@ -17,32 +17,41 @@ const featuredProjects = allProjects.filter(p => p.data.featured);
 		<section id="home" class="relative h-screen w-full overflow-hidden">
             <div class="absolute inset-0">
                 <!-- Parallax Wrapper -->
-                <div id="parallax-bg" class="absolute inset-0 h-[140%] -top-[20%] w-full will-change-transform">
+                <div id="parallax-bg" class="absolute inset-0 h-[115%] -top-[15%] w-full will-change-transform">
                      <img 
-                        src="/hero.jpg" 
+                        src="/hero-main.jpg" 
                         alt="Hero" 
-                        class="w-full h-full object-cover animate-ken-burns"
+                        class="w-full h-full object-cover object-[center_65%] animate-ken-burns"
                     />
                 </div>
                 <!-- Overlay inside parallax wrapper or static? Static to cover screen properly -->
                 <div class="absolute inset-0 bg-black/20 pointer-events-none"></div>
             </div>
 			
-			<div class="relative z-10 h-full flex flex-col justify-between p-8 md:p-16 pb-12">
+			<div class="relative z-10 h-full flex flex-col p-8 md:p-16 pb-12">
                 
-
-				<div class="max-w-[90vw]">
-					<h1 class="text-7xl md:text-[11vw] leading-[0.85] font-normal tracking-tight text-white mix-blend-overlay">
-						<span class="block reveal-text" style="animation-delay: 0.1s">Material.</span>
-						<span class="block reveal-text ml-[10vw]" style="animation-delay: 0.3s">Meaning.</span>
-						<span class="block reveal-text" style="animation-delay: 0.5s">Mood.</span>
-					</h1>
+				<div class="max-w-[90vw] flex-1 flex flex-col justify-center">
+					<div class="text-white">
+                        <!-- Elegant Inline Concepts -->
+                        <div class="flex flex-wrap items-baseline gap-x-6 md:gap-x-12 text-4xl md:text-5xl lg:text-6xl font-light opacity-90 mb-12 md:mb-20">
+                            <span class="reveal-text" style="animation-delay: 0.1s">חומר.</span>
+                            <span class="reveal-text" style="animation-delay: 0.2s">משמעות.</span>
+                            <span class="reveal-text" style="animation-delay: 0.3s">צורה.</span>
+                        </div>
+                        
+                        <!-- Massive Anchor Name -->
+						<h1 class="text-white text-8xl md:text-[13vw] leading-[0.75] font-bold tracking-tighter reveal-text" style="animation-delay: 0.4s">
+							עלמא.
+						</h1>
+                        
+                        <!-- Cinematic Slogan Below -->
+						<p class="text-xl md:text-3xl mt-12 md:mt-20 opacity-80 font-light tracking-[0.1em] reveal-text" style="animation-delay: 0.6s">
+							אדריכלות שבין אדם למקום.
+						</p>
+					</div>
 				</div>
 
-                <div class="flex justify-between items-end text-white border-t border-white/30 pt-6">
-                    <p class="text-sm md:text-base font-light max-w-md tracking-wide opacity-90">
-                        סטודיו לאדריכלות ועיצוב פנים המתמחה בחללי מגורים יוקרתיים ופרויקטים מסחריים.
-                    </p>
+                <div class="flex justify-end items-end text-white border-t border-white/30 pt-6 mt-auto">
                     <div class="animate-bounce text-2xl">↓</div>
                 </div>
 			</div>
@@ -52,7 +61,7 @@ const featuredProjects = allProjects.filter(p => p.data.featured);
 		<section id="portfolio" class="py-32 px-8 md:px-16 bg-white overflow-hidden">
             <div class="max-w-[1800px] mx-auto">
                 <div class="mb-32 flex justify-between items-end">
-                    <h2 class="text-5xl md:text-9xl font-light tracking-tighter text-black">השראה</h2>
+                    <h2 class="text-5xl md:text-9xl font-light tracking-tighter text-black">עלמא</h2>
                     <p class="text-sm font-bold tracking-[0.3em] uppercase text-gray-400 mb-4 hidden md:block">Gallery of Vision</p>
                 </div>
 
@@ -65,7 +74,7 @@ const featuredProjects = allProjects.filter(p => p.data.featured);
                         <div class="max-w-md">
                             <span class="text-xs font-mono text-gray-400 mb-2 block tracking-widest">STYLE 01</span>
                             <h3 class="text-3xl font-light mb-4">מינימליזם אורגני</h3>
-                            <p class="text-gray-500 font-light leading-relaxed">
+                            <p class="text-xl text-gray-500 font-light leading-relaxed">
                                 המפגש בין קווים גיאומטריים נוקשים לבין חומרים טבעיים וצורות אמורפיות. יצירת חלל שנושם יחד עם דייריו.
                             </p>
                         </div>
@@ -79,7 +88,7 @@ const featuredProjects = allProjects.filter(p => p.data.featured);
                         <div class="max-w-xs mr-auto">
                             <span class="text-xs font-mono text-gray-400 mb-2 block tracking-widest">STYLE 02</span>
                             <h3 class="text-3xl font-light mb-4">דיאלוג עם האור</h3>
-                            <p class="text-gray-500 font-light leading-relaxed">
+                            <p class="text-xl text-gray-500 font-light leading-relaxed">
                                 האור הוא החומר השקוף ביותר בתהליך התכנון. אנחנו משתמשים בו כדי לפסל את החלל ולהעניק לו עומק משתנה לאורך שעות היום.
                             </p>
                         </div>
@@ -93,7 +102,7 @@ const featuredProjects = allProjects.filter(p => p.data.featured);
                         <div class="max-w-sm">
                             <span class="text-xs font-mono text-gray-400 mb-2 block tracking-widest">STYLE 03</span>
                             <h3 class="text-3xl font-light mb-4">אדריכלות של פרטים</h3>
-                            <p class="text-gray-500 font-light leading-relaxed">
+                            <p class="text-xl text-gray-500 font-light leading-relaxed">
                                 אמונה שהשלם גדול מסכום חלקיו רק כאשר כל חלק מטופל בחרדת קודש. נגרות אומן, חיבורי חומרים ודיוק של מילימטרים.
                             </p>
                         </div>
@@ -107,7 +116,7 @@ const featuredProjects = allProjects.filter(p => p.data.featured);
                         <div class="max-w-md md:mr-auto">
                             <span class="text-xs font-mono text-gray-400 mb-2 block tracking-widest">STYLE 04</span>
                             <h3 class="text-3xl font-light mb-4">חומרים שמרגישים</h3>
-                            <p class="text-gray-500 font-light leading-relaxed">
+                            <p class="text-xl text-gray-500 font-light leading-relaxed">
                                 אבן טבעית, עץ אלון מוברש וברזל חשוף. אנחנו בוחרים חומרים שמתיישנים בכבוד ומספרים סיפור של אותנטיות וחיבור לאדמה.
                             </p>
                         </div>
@@ -122,7 +131,7 @@ const featuredProjects = allProjects.filter(p => p.data.featured);
                             <div class="max-w-xl">
                                 <span class="text-xs font-mono text-gray-400 mb-2 block tracking-widest">STYLE 05</span>
                                 <h3 class="text-5xl font-light mb-6">מקדש של שקט</h3>
-                                <p class="text-xl text-gray-500 font-light leading-relaxed">
+                                <p class="text-2xl text-gray-500 font-light leading-relaxed">
                                     חללי רחצה ו-Wellness שהופכים למפלט מהעולם החיצון. שימוש בשיש טבעי ובקווים נקיים ליצירת חוויה של רוגע מוחלט.
                                 </p>
                             </div>
@@ -138,7 +147,7 @@ const featuredProjects = allProjects.filter(p => p.data.featured);
                         <div class="max-w-md">
                             <span class="text-xs font-mono text-gray-400 mb-2 block tracking-widest">STYLE 06</span>
                             <h3 class="text-3xl font-light mb-4">המפגש הראשון</h3>
-                            <p class="text-gray-500 font-light leading-relaxed">
+                            <p class="text-xl text-gray-500 font-light leading-relaxed">
                                 עיצוב מבואת כניסה המשלב חומרים חמים עם אלמנטים גיאומטריים מזמינים. יצירת מעבר הדרגתי ונעים מהחוץ אל הפנים.
                             </p>
                         </div>
@@ -152,7 +161,7 @@ const featuredProjects = allProjects.filter(p => p.data.featured);
                         <div class="max-w-md">
                             <span class="text-xs font-mono text-gray-400 mb-2 block tracking-widest">STYLE 07</span>
                             <h3 class="text-3xl font-light mb-4">דרמה מאופקת</h3>
-                            <p class="text-gray-500 font-light leading-relaxed">
+                            <p class="text-xl text-gray-500 font-light leading-relaxed">
                                 מטבחים במינימליזם כהה ומוקפד. שימוש בטקסטורות עץ עמוקות בשילוב אי מאבן טבעית ליצירת מראה יוקרתי ועל-זמני.
                             </p>
                         </div>
@@ -184,17 +193,68 @@ const featuredProjects = allProjects.filter(p => p.data.featured);
                         </div>
                         <div class="md:pl-24 max-w-2xl space-y-8">
                             <p class="text-xl md:text-2xl font-light leading-relaxed text-gray-800">
-                                הסטודיו מביא עמו ניסיון עשיר של למעלה מ-8 שנים בתכנון מגה-פרויקטים ומבנים מורכבים בארץ ובחו"ל.
-                                חני הובילה תכנון בפרויקטים אייקוניים כמו מגדלי <strong class="font-normal">Beyond (תדהר)</strong> – פרויקט הדגל בגבעתיים המשלב מגדל משרדים בן 70 קומות ומגדל מגורים בן 45 קומות.
+                                בסטודיו עלמא אני מאמינה שאדריכלות ועיצוב פנים הם הרבה מעבר ליצירת חלל יפה - הם דרך לברוא מקום שיש בו שייכות, נוכחות, שקט ועומק. החזון שלי הוא ליצור בתים וחללים שמרגישים נכונים באמת: מדויקים למי שחי בהם, קשובים לאורח החיים שלהם, ולדרך שבה הם רוצים להרגיש ביום־יום. אני דוגלת באדריכלות שורשית - כזו שמחוברת לאדמה, לחומר, לזמן, ולאדם. אדריכלות שלא רודפת אחרי טרנדים או מחוות רגעיות, אלא מבקשת ליצור יסודות חזקים, יופי על־זמני, ופשטות שיש בה עומק.
+                            </p>
+                            <p class="text-lg font-light leading-relaxed text-gray-700">
+                                מבחינתי, תכנון טוב נולד מהקשבה אמיתית: הקשבה לאנשים, להרגלים שלהם, למה שנאמר וגם למה שלא תמיד יודעים לנסח במילים. מתוך ההקשבה הזו נבנה תהליך מדויק, רגיש ומאוד אישי, שבו כל החלטה נובעת ממשמעות ולא רק ממראה. אני מאמינה בחומריות כנה, בגוונים טבעיים, בקווים נקיים אך לא קרים, ובחללים שמצליחים להרגיש גם יציבים וגם רכים, גם מוקפדים וגם חיים.
                             </p>
                             <p class="text-lg font-light leading-relaxed text-gray-600">
-                                הניסיון המקצועי שלה, שנצבר במשרד המוביל <strong class="font-normal">ברעלי לויצקי כסיף (B.L.K)</strong>, כולל עבודה על פרויקטים רחבי היקף כמו "סביוני השרון" בנתניה ופרויקט "הגדוד העברי". יכולות אלו, המשלבות ראייה אסטרטגית וניהול צוותים בינלאומיים, מתורגמות כיום לסטודיו בוטיק המעניק תשומת לב אישית ודיוק אדריכלי חסר פשרות.
+                                הערכים שמובילים אותי הם אמת, דיוק, קשב, מלאכה, פשטות, חמימות ונאמנות למקום - לא רק כמיקום פיזי, אלא כתחושת בית עמוקה. אני שואפת ליצור עבור הלקוחות שלי חללים שיש בהם סדר, נשימה ואיזון; חללים שמאפשרים לחיים לקרות בהם באמת, ביופי שקט ולא מתאמץ. עלמא עבורי היא תפיסה שלמה: חיבור בין חומר לרגש, בין פרקטיקה לאסתטיקה, בין בית כמבנה לבין בית כתחושה. זהו עיצוב שמבקש להחזיק חיים שלמים - משפחה, אירוח, שגרה, התבגרות, זיכרונות - ולתת להם מסגרת מדויקת, טבעית ועמוקה, שמרגישה נכונה גם היום וגם בעוד שנים.
                             </p>
+                            
+                            <div class="pt-8 border-t border-black/10">
+                                <p class="text-lg font-light leading-relaxed text-gray-800 mb-6">
+                                    הסטודיו מביא עמו ניסיון עשיר של למעלה מ-8 שנים בתכנון מגה-פרויקטים ומבנים מורכבים בארץ ובחו"ל.
+                                    חני הובילה תכנון בפרויקטים אייקוניים כמו מגדלי <strong class="font-normal">Beyond (תדהר)</strong> – פרויקט הדגל בגבעתיים המשלב מגדל משרדים בן 70 קומות ומגדל מגורים בן 45 קומות.
+                                </p>
+                                <p class="text-base font-light leading-relaxed text-gray-600">
+                                    הניסיון המקצועי שלה, שנצבר במשרד המוביל <strong class="font-normal">ברעלי לויצקי כסיף (B.L.K)</strong>, כולל עבודה על פרויקטים רחבי היקף כמו "סביוני השרון" בנתניה ופרויקט "הגדוד העברי". יכולות אלו, המשלבות ראייה אסטרטגית וניהול צוותים בינלאומיים, מתורגמות כיום לסטודיו בוטיק המעניק תשומת לב אישית ודיוק אדריכלי חסר פשרות.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 		</section>
+
+        <!-- Core Values Section -->
+        <section id="values" class="py-32 px-8 md:px-16 max-w-[1800px] mx-auto border-t border-black/5">
+            <div class="mb-24 flex justify-between items-end">
+                <h2 class="text-4xl md:text-8xl font-light tracking-tighter fade-up">ערכי ליבה</h2>
+                <span class="text-xs font-bold tracking-[0.2em] uppercase text-gray-400 mb-4 hidden md:block">Core Values</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-24">
+                <!-- Value 1 -->
+                <div class="group border-t border-black/10 pt-12 fade-up" style="transition-delay: 100ms;">
+                    <span class="text-sm font-mono text-gray-400 mb-8 block">01</span>
+                    <h3 class="text-3xl md:text-4xl font-light mb-6">אנושיות</h3>
+                    <p class="text-xl text-gray-600 font-light leading-relaxed">
+                        אמונה בחשיבותם של חום, רגישות ושייכות בתוך החיים עצמם. 
+                        ערך שמחזיק בתוכו את המשפחה, הלב, והשאיפה ליצור קשר ומרחב שיש בהם נוכחות, רוך ואותנטיות.
+                    </p>
+                </div>
+
+                <!-- Value 2 -->
+                <div class="group border-t border-black/10 pt-12 fade-up" style="transition-delay: 200ms;">
+                    <span class="text-sm font-mono text-gray-400 mb-8 block">02</span>
+                    <h3 class="text-3xl md:text-4xl font-light mb-6">אמת</h3>
+                    <p class="text-xl text-gray-600 font-light leading-relaxed">
+                        חשוב לי לפעול מתוך כנות ונאמנות למה שמרגיש נכון באמת.
+                        אני מאמינה שדיוק אמיתי מתחיל ביושר - מול עצמי, מול הלקוחות, ומול התהליך.
+                    </p>
+                </div>
+
+                <!-- Value 3 -->
+                <div class="group border-t border-black/10 pt-12 fade-up" style="transition-delay: 300ms;">
+                    <span class="text-sm font-mono text-gray-400 mb-8 block">03</span>
+                    <h3 class="text-3xl md:text-4xl font-light mb-6">מסירות</h3>
+                    <p class="text-xl text-gray-600 font-light leading-relaxed">
+                        אני מאמינה מכל הלב שאם עושים משהו אז הוא צריך להעשות עד הסוף ובצורה הטובה והעמוקה ביותר.
+                    </p>
+                </div>
+            </div>
+        </section>
 
         <!-- Services - Horizontal Scroll / List -->
         <section id="services" class="py-32 border-t border-gray-100">
@@ -247,7 +307,7 @@ const featuredProjects = allProjects.filter(p => p.data.featured);
 		<section id="contact" class="py-32 px-8 md:px-16 bg-[#1a1a1a] text-white">
 			<div class="max-w-4xl mx-auto text-center">
                 <p class="text-sm font-bold tracking-[0.3em] uppercase text-gray-500 mb-8">Get in Touch</p>
-				<h2 class="text-6xl md:text-9xl font-light tracking-tighter mb-16 leading-none">
+				<h2 class="text-white text-6xl md:text-9xl font-light tracking-tighter mb-16 leading-none">
                     יש לכם פרויקט?<br>בואו נדבר.
                 </h2>
                 
@@ -275,7 +335,7 @@ const featuredProjects = allProjects.filter(p => p.data.featured);
 	</main>
 
     <footer class="bg-[#1a1a1a] text-white/40 py-12 px-8 md:px-16 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-xs tracking-widest uppercase">
-        <p>&copy; {new Date().getFullYear()} Berger Studio</p>
+        <p>&copy; {new Date().getFullYear()} Alma</p>
         <div class="flex gap-8 mt-4 md:mt-0">
             <a href="#" class="hover:text-white transition-colors">Instagram</a>
             <a href="#" class="hover:text-white transition-colors">Pinterest</a>
@@ -287,10 +347,10 @@ const featuredProjects = allProjects.filter(p => p.data.featured);
     /* Custom Animations */
     @keyframes ken-burns {
         0% { transform: scale(1); }
-        100% { transform: scale(1.1); }
+        100% { transform: scale(1.05); }
     }
     .animate-ken-burns {
-        animation: ken-burns 20s ease-out infinite alternate;
+        animation: ken-burns 30s ease-out infinite alternate;
     }
     
     .reveal-text {
@@ -315,8 +375,8 @@ const featuredProjects = allProjects.filter(p => p.data.featured);
         window.addEventListener('scroll', () => {
             const scrollPosition = window.scrollY;
             if (scrollPosition < window.innerHeight) {
-                // Move the background down at 30% speed of scroll
-                heroBg.style.transform = `translateY(${scrollPosition * 0.3}px)`;
+                // Move the background down at 15% speed of scroll
+                heroBg.style.transform = `translateY(${scrollPosition * 0.15}px)`;
             }
         }, { passive: true });
     }

@@ -2,13 +2,12 @@
 
 @theme {
   --color-berger-brown: #504239;
-  --font-hebrew: "Noto Sans Hebrew", sans-serif;
-  --default-font-family: var(--font-hebrew);
+  --font-cardo: "Cardo", serif;
 }
 
 @layer base {
   html {
-    @apply font-hebrew text-black bg-white;
+    @apply font-cardo text-black bg-white;
   }
   
   h1, h2, h3, h4, h5, h6 {

@@ -3,15 +3,9 @@
 <nav class="w-full py-6 px-8 md:px-16 flex justify-between items-center fixed top-0 z-50 mix-blend-difference text-white transition-all duration-500" id="navbar">
   <!-- Logo -->
   <a href="#home" class="group relative z-50">
-    <div class="flex items-center gap-3" dir="ltr">
-      <img
-        src="/logo.svg"
-        alt="Berger Studio"
-        class="w-7 h-7 object-contain invert opacity-95"
-        loading="eager"
-      />
-      <div class="text-2xl font-bold tracking-tight uppercase">
-        Berger<span class="font-light opacity-70">Studio</span>
+    <div class="flex items-center" dir="rtl">
+      <div class="text-3xl font-bold tracking-tighter">
+        עלמא.
       </div>
     </div>
   </a>
@@ -81,12 +75,13 @@
     // Navbar scroll effect
     window.addEventListener('scroll', () => {
         const nav = document.getElementById('navbar');
-        if (window.scrollY > 50) {
-            nav?.classList.add('py-4');
-            nav?.classList.remove('py-6');
+        // Trigger solid white navbar once past the hero section
+        if (window.scrollY > window.innerHeight - 80) {
+            nav?.classList.add('py-4', 'bg-white', 'text-black');
+            nav?.classList.remove('py-6', 'mix-blend-difference', 'text-white');
         } else {
-            nav?.classList.add('py-6');
-            nav?.classList.remove('py-4');
+            nav?.classList.add('py-6', 'mix-blend-difference', 'text-white');
+            nav?.classList.remove('py-4', 'bg-white', 'text-black');
         }
     });
 </script>
