@@ -18,7 +18,12 @@ const imageAlt = entry.data.description
   : `תמונת פרויקט ${entry.data.title}`;
 ---
 
-<Layout title={`${entry.data.title} | Alma`}>
+<Layout
+  title={`${entry.data.title} | Alma`}
+  description={entry.data.description}
+  ogImage={entry.data.coverImage}
+  ogType="article"
+>
   <Navbar />
 
   <main id="main-content" tabindex="-1">
