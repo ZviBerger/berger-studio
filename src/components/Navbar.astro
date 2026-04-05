@@ -16,8 +16,9 @@ const navLinks = [
 >
   <a
     href={isHomePage ? '#home' : '/#home'}
-    class="group relative z-50"
+    class="group relative z-50 transition-opacity duration-300"
     aria-label="עלמא - חזרה לתחילת העמוד"
+    id="navbar-logo"
   >
     <div class="flex items-center" dir="rtl">
       <div class="text-3xl font-bold tracking-tighter">עלמא.</div>
@@ -159,6 +160,8 @@ const navLinks = [
     'scroll',
     () => {
       const nav = document.getElementById('navbar');
+      const logo = document.getElementById('navbar-logo');
+      const isMobile = window.innerWidth < 768;
       if (!nav || isOpen) {
         return;
       }
@@ -166,11 +169,24 @@ const navLinks = [
       if (window.scrollY > window.innerHeight - 80) {
         nav.classList.add('py-4', 'bg-white', 'text-black');
         nav.classList.remove('py-6', 'mix-blend-difference', 'text-white');
+        if (isMobile) {
+          logo?.classList.remove('opacity-0', 'pointer-events-none');
+        }
       } else {
         nav.classList.add('py-6', 'mix-blend-difference', 'text-white');
         nav.classList.remove('py-4', 'bg-white', 'text-black');
+        if (isMobile && window.location.pathname === '/') {
+          logo?.classList.add('opacity-0', 'pointer-events-none');
+        }
       }
     },
     { passive: true },
   );
+
+  window.addEventListener('load', () => {
+    const logo = document.getElementById('navbar-logo');
+    if (window.innerWidth < 768 && window.location.pathname === '/' && window.scrollY < window.innerHeight - 80) {
+      logo?.classList.add('opacity-0', 'pointer-events-none');
+    }
+  });
 </script>
