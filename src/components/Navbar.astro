@@ -1,49 +1,71 @@
 ---
-const isHomePage = Astro.url.pathname === '/';
+import { getLocaleFromPath, withLocale } from '../utils/i18n';
 
+const locale = getLocaleFromPath(Astro.url.pathname);
+const isEnglish = locale === 'en';
+const homePaths = isEnglish ? ['/en', '/en/'] : ['/'];
+const basePath = isEnglish ? '/en' : '';
+const isHomePage = homePaths.includes(Astro.url.pathname);
 const navLinks = [
-  { href: isHomePage ? '#about' : '/#about', label: 'אודות' },
-  { href: isHomePage ? '#portfolio' : '/#portfolio', label: 'פורטפוליו' },
-  { href: isHomePage ? '#services' : '/#services', label: 'שירותים' },
-  { href: isHomePage ? '#contact' : '/#contact', label: 'צור קשר' },
+  { href: isHomePage ? '#about' : `${basePath}/#about`, label: isEnglish ? 'About' : 'אודות' },
+  { href: isHomePage ? '#portfolio' : `${basePath}/#portfolio`, label: isEnglish ? 'Portfolio' : 'פורטפוליו' },
+  { href: isHomePage ? '#services' : `${basePath}/#services`, label: isEnglish ? 'Services' : 'שירותים' },
+  { href: isHomePage ? '#contact' : `${basePath}/#contact`, label: isEnglish ? 'Contact' : 'צור קשר' },
 ];
+const switchHref = withLocale(Astro.url.pathname, isEnglish ? 'he' : 'en');
+const switchLabel = isEnglish ? 'עברית' : 'English';
+const navLabel = isEnglish ? 'Primary navigation' : 'ניווט ראשי';
+const backToTopLabel = isEnglish ? 'Alma - back to top' : 'עלמא - חזרה לתחילת העמוד';
+const openMenuLabel = isEnglish ? 'Open main menu' : 'פתיחת תפריט ראשי';
+const openMenuText = isEnglish ? 'Open menu' : 'פתיחת תפריט';
+const mobileNavLabel = isEnglish ? 'Mobile navigation' : 'ניווט נייד';
+const closeMenuLabel = isEnglish ? 'Close main menu' : 'סגירת תפריט ראשי';
+const brandLabel = isEnglish ? 'Alma.' : 'עלמא.';
 ---
 
 <nav
-  class="w-full py-6 px-8 md:px-16 flex justify-between items-center fixed top-0 z-50 mix-blend-difference text-white transition-all duration-500"
+  class="w-full py-6 px-8 md:px-16 flex justify-between items-center fixed top-0 z-50 text-white transition-all duration-500"
   id="navbar"
-  aria-label="ניווט ראשי"
+  aria-label={navLabel}
 >
   <a
-    href={isHomePage ? '#home' : '/#home'}
+    href={isHomePage ? '#home' : `${basePath}/#home`}
     class="group relative z-50 transition-opacity duration-300"
-    aria-label="עלמא - חזרה לתחילת העמוד"
+    aria-label={backToTopLabel}
     id="navbar-logo"
   >
-    <div class="flex items-center" dir="rtl">
-      <div class="text-3xl font-bold tracking-tighter">עלמא.</div>
+    <div class="flex items-center" dir={isEnglish ? 'ltr' : 'rtl'}>
+      <div class="text-3xl font-bold tracking-tighter">{brandLabel}</div>
     </div>
   </a>
 
-  <ul class="hidden md:flex items-center gap-12 text-sm font-medium tracking-[0.12em] list-none m-0 p-0" role="list">
-    {navLinks.map((link) => (
-      <li>
-        <a href={link.href} class="nav-link inline-block hover:opacity-70 transition-opacity duration-300">
-          {link.label}
-        </a>
-      </li>
-    ))}
-  </ul>
+  <div class="hidden md:flex items-center gap-8">
+    <ul class="flex items-center gap-12 text-sm font-medium tracking-[0.12em] list-none m-0 p-0" role="list">
+      {navLinks.map((link) => (
+        <li>
+          <a href={link.href} class="nav-link inline-block hover:opacity-70 transition-opacity duration-300">
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+    <a
+      href={switchHref}
+      class="inline-flex items-center rounded-full border border-current/30 px-4 py-2 text-xs font-medium tracking-[0.18em] uppercase hover:bg-white hover:text-black transition-colors duration-300"
+    >
+      {switchLabel}
+    </a>
+  </div>
 
   <button
     type="button"
     class="md:hidden relative z-50 w-10 h-10 flex flex-col justify-center gap-2 group"
-    aria-label="פתיחת תפריט ראשי"
+    aria-label={openMenuLabel}
     aria-controls="mobile-menu"
     aria-expanded="false"
     id="menu-btn"
   >
-    <span class="sr-only">פתיחת תפריט</span>
+    <span class="sr-only">{openMenuText}</span>
     <span class="w-full h-[1px] bg-current transition-all duration-300 origin-center"></span>
     <span class="w-full h-[1px] bg-current transition-all duration-300 origin-center"></span>
   </button>
@@ -54,7 +76,7 @@ const navLinks = [
   class="fixed inset-0 bg-black z-40 translate-x-full transition-transform duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] flex items-center justify-center"
   aria-hidden="true"
 >
-  <nav aria-label="ניווט נייד">
+  <nav aria-label={mobileNavLabel}>
     <ul class="flex flex-col gap-8 text-4xl font-light text-white text-center list-none m-0 p-0" role="list">
       {navLinks.map((link) => (
         <li>
@@ -63,11 +85,19 @@ const navLinks = [
           </a>
         </li>
       ))}
+      <li>
+        <a
+          href={switchHref}
+          class="mobile-link inline-flex items-center justify-center rounded-full border border-white/30 px-6 py-3 text-base uppercase tracking-[0.18em]"
+        >
+          {switchLabel}
+        </a>
+      </li>
     </ul>
   </nav>
 </div>
 
-<script>
+<script define:vars={{ openMenuLabel, closeMenuLabel, homePaths }}>
   const menuBtn = document.getElementById('menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
   const links = Array.from(document.querySelectorAll('.mobile-link'));
@@ -85,7 +115,7 @@ const navLinks = [
     }
 
     menuBtn.setAttribute('aria-expanded', String(open));
-    menuBtn.setAttribute('aria-label', open ? 'סגירת תפריט ראשי' : 'פתיחת תפריט ראשי');
+    menuBtn.setAttribute('aria-label', open ? closeMenuLabel : openMenuLabel);
     mobileMenu.setAttribute('aria-hidden', String(!open));
 
     if (open) {
@@ -168,14 +198,14 @@ const navLinks = [
 
       if (window.scrollY > window.innerHeight - 80) {
         nav.classList.add('py-4', 'bg-white', 'text-black');
-        nav.classList.remove('py-6', 'mix-blend-difference', 'text-white');
+        nav.classList.remove('py-6', 'text-white');
         if (isMobile) {
           logo?.classList.remove('opacity-0', 'pointer-events-none');
         }
       } else {
-        nav.classList.add('py-6', 'mix-blend-difference', 'text-white');
+        nav.classList.add('py-6', 'text-white');
         nav.classList.remove('py-4', 'bg-white', 'text-black');
-        if (isMobile && window.location.pathname === '/') {
+        if (isMobile && homePaths.includes(window.location.pathname)) {
           logo?.classList.add('opacity-0', 'pointer-events-none');
         }
       }
@@ -185,7 +215,7 @@ const navLinks = [
 
   window.addEventListener('load', () => {
     const logo = document.getElementById('navbar-logo');
-    if (window.innerWidth < 768 && window.location.pathname === '/' && window.scrollY < window.innerHeight - 80) {
+    if (window.innerWidth < 768 && homePaths.includes(window.location.pathname) && window.scrollY < window.innerHeight - 80) {
       logo?.classList.add('opacity-0', 'pointer-events-none');
     }
   });

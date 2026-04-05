@@ -1,0 +1,94 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+
+const lastUpdated = 'April 3, 2026';
+---
+
+<Layout
+  title="Accessibility Statement | Alma"
+  description="Alma Studio's accessibility statement, including accessibility contact details and the adjustments made across the website."
+>
+  <Navbar />
+
+  <main id="main-content" tabindex="-1" class="pt-28 pb-20 px-6 md:px-12">
+    <div class="max-w-4xl mx-auto">
+      <header class="mb-12 border-b border-black/10 pb-8">
+        <p class="text-sm tracking-[0.2em] uppercase text-stone-600 mb-4">Accessibility Statement</p>
+        <h1 class="text-4xl md:text-6xl mb-6">Accessibility Statement</h1>
+        <p class="text-lg text-stone-800">
+          Alma Studio works to provide a respectful, clear, and comfortable browsing experience for all visitors,
+          including people with disabilities.
+        </p>
+      </header>
+
+      <section class="space-y-6 mb-12" aria-labelledby="legal-basis">
+        <h2 id="legal-basis" class="text-2xl md:text-3xl">Accessibility framework</h2>
+        <p class="text-lg text-stone-800">
+          This website has been updated in line with accessibility principles commonly applied in Israel,
+          including the Equal Rights for Persons with Disabilities Regulations (Accessibility Adjustments to
+          Service), 2013, and Israeli Standard 5568, which is based on WCAG 2.0 Level AA.
+        </p>
+        <p class="text-lg text-stone-800">
+          Because websites are dynamic environments, some areas may still require ongoing review or further
+          refinement. If you encounter any difficulty, we would appreciate hearing from you so we can address it
+          promptly.
+        </p>
+      </section>
+
+      <section class="space-y-6 mb-12" aria-labelledby="site-adjustments">
+        <h2 id="site-adjustments" class="text-2xl md:text-3xl">Accessibility adjustments made on the site</h2>
+        <ul class="list-disc pl-6 space-y-3 text-lg text-stone-800">
+          <li>Added a “Skip to main content” link for faster keyboard navigation.</li>
+          <li>Improved the primary and mobile navigation with support for Tab, Escape, and open/close states.</li>
+          <li>Strengthened focus visibility for links, buttons, and form fields.</li>
+          <li>Improved text contrast in key areas of the site.</li>
+          <li>Added alternative text for content images and marked decorative images appropriately.</li>
+          <li>Added clear form labels instead of relying on placeholders alone.</li>
+          <li>Adjusted animations and motion behavior for users who prefer reduced motion.</li>
+          <li>Used a clear semantic structure for headings, content regions, forms, and navigation.</li>
+        </ul>
+      </section>
+
+      <section class="space-y-6 mb-12" aria-labelledby="widget-info">
+        <h2 id="widget-info" class="text-2xl md:text-3xl">Accessibility helper widget</h2>
+        <p class="text-lg text-stone-800">
+          The site includes an accessibility helper widget that offers actions such as display adjustments and
+          reading support. This tool is intended to assist users, but it does not replace accessibility built into
+          the site’s code and does not, by itself, constitute legal compliance.
+        </p>
+      </section>
+
+      <section class="space-y-6 mb-12" aria-labelledby="compatibility">
+        <h2 id="compatibility" class="text-2xl md:text-3xl">Compatibility and use</h2>
+        <p class="text-lg text-stone-800">
+          The website was built to support keyboard navigation, left-to-right browsing in English, and use in
+          common modern browsers on desktop and mobile devices.
+        </p>
+      </section>
+
+      <section class="space-y-6 mb-12" aria-labelledby="accessibility-contact">
+        <h2 id="accessibility-contact" class="text-2xl md:text-3xl">Accessibility contact</h2>
+        <p class="text-lg text-stone-800">
+          If you encounter an issue, find content that is not accessible to you, or need further assistance, please
+          contact us and we will do our best to provide an appropriate response as soon as possible.
+        </p>
+        <div class="rounded-2xl border border-black/10 p-6 space-y-3 text-lg text-stone-800">
+          <p>
+            Email:
+            <a href="mailto:chani@alma-architects.com" class="underline" dir="ltr">chani@alma-architects.com</a>
+          </p>
+          <p>
+            Phone:
+            <a href="tel:+972543395560" class="underline" dir="ltr">054-339-5560</a>
+          </p>
+          <p>Address: 10 Yonatan St., Neve Shamir, Beit Shemesh</p>
+          <p>Statement last updated: {lastUpdated}</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

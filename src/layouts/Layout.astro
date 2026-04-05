@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { getLocaleFromPath } from '../utils/i18n';
 
 interface Props {
 	title: string;
@@ -15,13 +16,23 @@ const defaultOgImage = '/preview-v4.jpg';
 
 const {
 	title,
-	description = 'עלמא - אדריכלות ועיצוב פנים',
+	description,
 	ogImage = defaultOgImage,
 	ogType = 'website',
 	ogImageWidth,
 	ogImageHeight,
 	ogImageMimeType,
 } = Astro.props;
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const defaultDescription =
+	locale === 'he' ? 'עלמא - אדריכלות ועיצוב פנים' : 'Alma - Architecture & Interior Design';
+const resolvedDescription = description ?? defaultDescription;
+const htmlLang = locale === 'he' ? 'he' : 'en';
+const htmlDir = locale === 'he' ? 'rtl' : 'ltr';
+const ogLocale = locale === 'he' ? 'he_IL' : 'en_US';
+const siteName = locale === 'he' ? 'עלמא' : 'Alma';
+const skipLinkLabel = locale === 'he' ? 'דלגו לתוכן הראשי' : 'Skip to main content';
 
 const siteUrl = Astro.site;
 const canonicalUrl = siteUrl
@@ -34,21 +45,21 @@ const resolvedOgImageMimeType = ogImage === defaultOgImage ? 'image/jpeg' : ogIm
 ---
 
 <!doctype html>
-<html lang="he" dir="rtl" class="scroll-smooth">
+<html lang={htmlLang} dir={htmlDir} class="scroll-smooth">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content={description} />
+		<meta name="description" content={resolvedDescription} />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="theme-color" content="#fcfcfc" />
 		<link rel="canonical" href={canonicalUrl} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<meta property="og:locale" content="he_IL" />
+		<meta property="og:locale" content={ogLocale} />
 		<meta property="og:type" content={ogType} />
 		<meta property="og:title" content={title} />
-		<meta property="og:description" content={description} />
+		<meta property="og:description" content={resolvedDescription} />
 		<meta property="og:url" content={canonicalUrl} />
-		<meta property="og:site_name" content="עלמא" />
+		<meta property="og:site_name" content={siteName} />
 		<meta property="og:image" content={ogImageUrl} />
 		<meta property="og:image:secure_url" content={ogImageUrl} />
 		{resolvedOgImageMimeType && <meta property="og:image:type" content={resolvedOgImageMimeType} />}
@@ -57,7 +68,7 @@ const resolvedOgImageMimeType = ogImage === defaultOgImage ? 'image/jpeg' : ogIm
 		<meta property="og:image:alt" content={title} />
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={title} />
-		<meta name="twitter:description" content={description} />
+		<meta name="twitter:description" content={resolvedDescription} />
 		<meta name="twitter:image" content={ogImageUrl} />
 
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -74,7 +85,7 @@ const resolvedOgImageMimeType = ogImage === defaultOgImage ? 'image/jpeg' : ogIm
 		<title>{title}</title>
 	</head>
 	<body class="bg-[#fcfcfc] text-berger-brown min-h-screen flex flex-col antialiased">
-		<a class="skip-link" href="#main-content">דלגו לתוכן הראשי</a>
+		<a class="skip-link" href="#main-content">{skipLinkLabel}</a>
 		<slot />
 	</body>
 </html>

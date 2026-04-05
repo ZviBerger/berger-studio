@@ -1,28 +1,37 @@
 ---
+import { getLocaleFromPath } from '../utils/i18n';
+
 const year = new Date().getFullYear();
+const locale = getLocaleFromPath(Astro.url.pathname);
+const isEnglish = locale === 'en';
+const basePath = isEnglish ? '/en' : '';
 ---
 
 <footer class="w-full py-12 px-6 md:px-12 border-t border-berger-brown/10 mt-auto">
   <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
     <div class="flex flex-col gap-2">
-      <h2 class="text-xl font-semibold">עלמא</h2>
-      <p class="text-sm text-stone-700">אדריכלות ועיצוב פנים</p>
+      <h2 class="text-xl font-semibold">{isEnglish ? 'Alma' : 'עלמא'}</h2>
+      <p class="text-sm text-stone-700">{isEnglish ? 'Architecture & Interior Design' : 'אדריכלות ועיצוב פנים'}</p>
     </div>
 
-    <nav aria-label="קישורי תחתית">
+    <nav aria-label={isEnglish ? 'Footer links' : 'קישורי תחתית'}>
       <ul class="flex flex-wrap gap-6 text-sm md:text-base" role="list">
         <li>
-          <a href="/#contact" class="hover:underline">צור קשר</a>
+          <a href={`${basePath}/#contact`} class="hover:underline">{isEnglish ? 'Contact' : 'צור קשר'}</a>
         </li>
         <li>
-          <a href="/accessibility-statement" class="hover:underline">הצהרת נגישות</a>
+          <a href={`${basePath}/accessibility-statement`} class="hover:underline">
+            {isEnglish ? 'Accessibility Statement' : 'הצהרת נגישות'}
+          </a>
         </li>
         <li>
-          <a href="mailto:Chila.eh@gmail.com" class="hover:underline" dir="ltr">Chila.eh@gmail.com</a>
+          <a href="mailto:chani@alma-architects.com" class="hover:underline" dir="ltr">chani@alma-architects.com</a>
         </li>
       </ul>
     </nav>
 
-    <div class="text-sm text-stone-600">&copy; {year} עלמא. כל הזכויות שמורות.</div>
+    <div class="text-sm text-stone-600">
+      &copy; {year} {isEnglish ? 'Alma. All rights reserved.' : 'עלמא. כל הזכויות שמורות.'}
+    </div>
   </div>
 </footer>
