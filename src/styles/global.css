@@ -3,11 +3,12 @@
 @theme {
   --color-berger-brown: #504239;
   --font-cardo: "Cardo", serif;
+  --font-assistant: "Assistant", sans-serif;
 }
 
 @layer base {
   html {
-    @apply font-cardo text-black bg-white;
+    @apply font-assistant text-black bg-white;
   }
 
   body {
@@ -15,7 +16,7 @@
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-light tracking-wide text-black;
+    @apply font-cardo font-light tracking-wide text-black;
   }
 
   a,

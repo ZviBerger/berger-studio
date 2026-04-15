@@ -40,10 +40,28 @@ const testimonials = [
       'Architect Chani Berger was part of the planning team for the Beyond project initiated by Tidhar, a project I managed. From knowing her both professionally and personally, I can say with full confidence that she is a high-caliber, hardworking, and exceptionally bright professional. Chani handled every task in the project, large and small, with initiative and genuine motivation to improve both the planning process and the final result. She is proactive, devoted, and committed to meeting goals at the highest level of quality. Alongside all of this, Chani is pleasant, intelligent, and brings excellent judgment and interpersonal skills. She integrated perfectly into the planning team and earned deep appreciation from the colleagues and managers who worked with her. I wish Chani great success in every path she chooses.',
     author: 'Galit Gat Horowitz',
     role: 'VP of Quality, Management Division - Tidhar',
-    image: '/trust-beyond.png',
+    image: '/trust-beyond.jpg',
     imageAlt:
       'An aerial rendering of the Beyond project with illuminated glass towers in the heart of the metropolitan skyline.',
     tag: 'Mega project',
+  },
+  {
+    quote:
+      'I would like to recommend Chani Berger, a talented young architect who worked alongside me on the "Savyonei HaShmura" urban renewal project by Africa Israel Residences, a large-scale project that included the planning of 512 housing units, public buildings, and commercial spaces. During our work together, Chani demonstrated exceptional diligence, thoroughness, and professionalism. She approached every aspect of the project with an energetic and committed attitude, showing full responsibility and precise, creative planning skills. Beyond her impressive professional abilities, she is a pleasant, service-oriented professional who knows how to listen, understand needs, and work fruitfully with all parties involved – planners and consultants alike. Work of the highest level, with personal and dedicated guidance all along the way.',
+    author: 'Dekel Rukban',
+    role: 'Project Manager, Africa Israel Residences',
+    image: '/trust-savyoney.jpg',
+    imageAlt: 'A visualization of the Savyonei HaShmura project with white residential towers',
+    tag: 'Mega project',
+  },
+  {
+    quote:
+      'I warmly recommend Chani Berger, who works with me as a planner opposite the Gabay Group. During our work together, I had the privilege of getting to know a professional, talented, and highly motivated woman who brings added value to every project she is involved in. Chani has shown exceptional abilities in architecture, both from a planning and a creative perspective. She handles challenges calmly, finding efficient and innovative solutions. She also excels in teamwork and maintains positive, effective communication with all parties involved in the projects. As a senior project manager, I can attest to Chani Berger’s significant contribution to the success of our projects. Thanks to her extensive professional knowledge, alongside her responsible and dedicated approach, she consistently meets deadlines and delivers the highest quality results. I recommend her wholeheartedly for any future role or project, confident she will be a meaningful asset to any organization or team lucky enough to work with her.',
+    author: 'Nofar Shraga',
+    role: 'Senior Project Manager, Gabay Group',
+    image: '/trust-gabai.jpg',
+    imageAlt: 'Visualization of a modern residential project with two towers',
+    tag: 'Architectural planning',
   },
 ];
 ---
@@ -71,7 +89,7 @@ const testimonials = [
         <div class="max-w-[90vw] flex-1 flex flex-col justify-center md:justify-start md:pt-[14vh]">
           <div class="text-white">
             <div
-              class="flex flex-wrap items-baseline gap-x-6 md:gap-x-12 text-3xl md:text-5xl lg:text-6xl font-light opacity-90 mb-8 md:mb-20"
+              class="flex flex-wrap items-baseline gap-x-6 md:gap-x-12 text-3xl md:text-5xl lg:text-6xl font-light opacity-90 mb-8 md:mb-20 font-cardo"
               aria-label="Material, meaning, form"
             >
               <span class="reveal-text" style="animation-delay: 0.1s">Material.</span>
@@ -88,7 +106,7 @@ const testimonials = [
             </h1>
 
             <p
-              class="text-lg md:text-3xl mt-8 md:mt-20 opacity-90 font-light tracking-[0.08em] reveal-text"
+              class="text-lg md:text-3xl mt-8 md:mt-20 opacity-90 font-light tracking-[0.08em] reveal-text font-cardo"
               style="animation-delay: 0.6s"
             >
               Architecture between people and place.
@@ -413,7 +431,7 @@ const testimonials = [
               <span class="text-sm font-mono tracking-[0.18em] text-stone-500 mb-5 block">
                 {item.label}
               </span>
-              <p class="text-4xl md:text-5xl font-light tracking-tight mb-5">{item.value}</p>
+              <p class="text-4xl md:text-5xl font-light tracking-tight mb-5 font-cardo">{item.value}</p>
               <p class="text-lg font-light leading-relaxed text-stone-700">{item.description}</p>
             </article>
           ))}
