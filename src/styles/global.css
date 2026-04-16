@@ -3,12 +3,12 @@
 @theme {
   --color-berger-brown: #504239;
   --font-cardo: "Cardo", serif;
-  --font-assistant: "Assistant", sans-serif;
+  --font-heebo: "Heebo", sans-serif;
 }
 
 @layer base {
   html {
-    @apply font-assistant text-black bg-white;
+    @apply font-heebo text-black bg-white;
   }
 
   body {

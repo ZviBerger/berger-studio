@@ -1,6 +1,15 @@
 ---
+import fs from 'node:fs';
+import path from 'node:path';
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
+
+const kitchenSvgRaw = fs.readFileSync(path.resolve('./public/kitchen.svg'), 'utf-8');
+const kitchenInnerPaths = kitchenSvgRaw
+  .replace(/^[\s\S]*?<svg[^>]*>/, '')
+  .replace(/<\/svg>\s*$/, '')
+  .replace(/fill="#000000"/g, 'fill="currentColor"')
+  .replace(/<path /g, '<path class="k-stroke" ');
 
 const phoneDisplay = '054-339-5560';
 const phoneHref = '+972543395560';
@@ -181,7 +190,7 @@ const faqs = [
               </p>
               <h2
                 id="portfolio-heading"
-                class="text-5xl md:text-9xl font-light tracking-tighter text-black"
+                class="text-4xl md:text-6xl font-light tracking-tighter text-black"
               >
                 עלמא
               </h2>
@@ -342,7 +351,7 @@ const faqs = [
           <div class="h-[1px] w-24 bg-black mb-12" aria-hidden="true"></div>
           <div class="flex flex-col gap-2">
             <span class="text-lg font-medium">חני ברגר</span>
-            <span class="text-sm text-stone-700 uppercase tracking-widest">אדריכלית ראשית</span>
+            <span class="text-sm text-stone-700 uppercase tracking-widest">הנדסאית אדריכלות</span>
           </div>
         </div>
 
@@ -389,7 +398,8 @@ const faqs = [
                 </p>
                 <p class="text-base font-light leading-relaxed text-stone-700">
                   הניסיון המקצועי שלה, שנצבר במשרד המוביל
-                  <strong class="font-normal"> ברעלי לויצקי כסיף (B.L.K)</strong>, כולל עבודה על
+                  <strong class="font-normal"> ברעלי לויצקי כסיף (B.L.K)</strong>, וכן במשרדי
+                  <strong class="font-normal"> רן בלנדר אדריכלים</strong> ו<strong class="font-normal">אורבך הלוי</strong>, כולל עבודה על
                   פרויקטים רחבי היקף כמו "סביוני השרון" בנתניה ופרויקט "הגדוד העברי". יכולות אלו,
                   המשלבות ראייה אסטרטגית וניהול צוותים בינלאומיים, מתורגמות כיום לסטודיו בוטיק
                   המעניק תשומת לב אישית ודיוק אדריכלי חסר פשרות.
@@ -407,7 +417,7 @@ const faqs = [
       aria-labelledby="values-heading"
     >
       <div class="mb-24 flex justify-between items-end gap-8">
-        <h2 id="values-heading" class="text-4xl md:text-8xl font-light tracking-tighter">ערכי ליבה</h2>
+        <h2 id="values-heading" class="text-4xl md:text-6xl font-light tracking-tighter">ערכי ליבה</h2>
         <span class="text-xs font-bold tracking-[0.2em] uppercase text-stone-600 mb-4 hidden md:block" aria-hidden="true">
           Core Values
         </span>
@@ -452,7 +462,7 @@ const faqs = [
         <div class="flex flex-col md:flex-row justify-between items-start gap-12 mb-20">
           <div class="max-w-3xl">
            
-            <h2 id="trust-heading" class="text-4xl md:text-7xl font-light tracking-tighter leading-tight mb-8">
+            <h2 id="trust-heading" class="text-4xl md:text-6xl font-light tracking-tighter leading-tight mb-8">
               יופי לא מספיק.<br />
               טוב שיש על מי לסמוך.
             </h2>
@@ -481,27 +491,27 @@ const faqs = [
           ))}
         </div>
 
-        <div class="grid grid-cols-1 xl:grid-cols-2 gap-10">
+        <div class="grid grid-cols-1 xl:grid-cols-2 gap-8 max-w-6xl mx-auto">
           {testimonials.map((testimonial) => (
             <article class="bg-white border border-black/8 overflow-hidden">
-              <div class="aspect-[4/3] overflow-hidden bg-stone-100">
+              <div class="aspect-[16/9] overflow-hidden bg-stone-100">
                 <img
                   src={testimonial.image}
                   alt={testimonial.imageAlt}
-                  class="w-full h-full object-cover transition-transform duration-[1.8s] hover:scale-105"
+                  class="w-full h-full object-cover grayscale transition-all duration-[1.8s] hover:scale-105 hover:grayscale-0"
                 />
               </div>
 
-              <div class="p-8 md:p-10">
-                <span class="text-xs font-bold tracking-[0.22em] uppercase text-stone-500 mb-6 block">
+              <div class="p-6 md:p-7">
+                <span class="text-[10px] font-bold tracking-[0.22em] uppercase text-stone-500 mb-4 block">
                   {testimonial.tag}
                 </span>
-                <blockquote class="text-lg md:text-[1.55rem] font-light leading-relaxed text-stone-800 mb-8">
+                <blockquote class="text-sm md:text-base font-light leading-relaxed text-stone-800 mb-6">
                   “{testimonial.quote}”
                 </blockquote>
-                <div class="border-t border-black/8 pt-6">
-                  <p class="text-xl font-medium">{testimonial.author}</p>
-                  <p class="text-sm tracking-[0.12em] uppercase text-stone-600 mt-2">
+                <div class="border-t border-black/8 pt-4">
+                  <p class="text-base font-medium">{testimonial.author}</p>
+                  <p class="text-xs tracking-[0.12em] uppercase text-stone-600 mt-1.5">
                     {testimonial.role}
                   </p>
                 </div>
@@ -514,7 +524,7 @@ const faqs = [
 
     <section id="services" class="py-32 border-t border-gray-100" aria-labelledby="services-heading">
       <div class="px-8 md:px-16 mb-24 flex justify-between items-end gap-8">
-        <h2 id="services-heading" class="text-4xl md:text-8xl font-light tracking-tighter">שירותים</h2>
+        <h2 id="services-heading" class="text-4xl md:text-6xl font-light tracking-tighter">שירותים</h2>
         <span class="text-xs font-bold tracking-[0.2em] uppercase text-stone-600 mb-4 hidden md:block" aria-hidden="true">
           Expertise
         </span>
@@ -611,9 +621,44 @@ const faqs = [
       </div>
     </section>
 
+    <section
+      id="sketch-reveal-2"
+      class="kitchen-reveal relative py-28 md:py-40 px-8 md:px-16 border-t border-black/5 bg-[#fcfcfc] overflow-hidden"
+      aria-hidden="true"
+    >
+      <div class="max-w-[1800px] mx-auto">
+        <div class="flex items-baseline justify-between gap-6 mb-10 text-[10px] md:text-[11px] font-mono tracking-[0.3em] uppercase text-stone-500">
+          <span class="arch-caption">RVT-02 · INTERIOR</span>
+          <span class="arch-caption">PROSPECT</span>
+        </div>
+
+        <div class="relative kitchen-sketch" dir="ltr">
+          <svg
+            class="block w-full h-auto"
+            style="color: #b7b7b7"
+            viewBox="0 0 976 656"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <defs>
+              <filter id="kitchen-thin">
+                <feMorphology operator="erode" radius="0.6" />
+              </filter>
+            </defs>
+            <g filter="url(#kitchen-thin)" set:html={kitchenInnerPaths} />
+          </svg>
+        </div>
+
+        <div class="mt-10 flex items-baseline justify-between gap-6 text-[10px] md:text-[11px] font-mono tracking-[0.3em] uppercase text-stone-500">
+          <span class="arch-caption">מטבח · KITCHEN STUDY</span>
+          <span class="arch-caption">סטודיו עלמא</span>
+        </div>
+      </div>
+    </section>
+
     <section id="faq" class="py-32 px-8 md:px-16 max-w-[1800px] mx-auto border-t border-black/5" aria-labelledby="faq-heading">
       <div class="mb-24 flex justify-between items-end gap-8">
-        <h2 id="faq-heading" class="text-4xl md:text-8xl font-light tracking-tighter">שאלות ותשובות</h2>
+        <h2 id="faq-heading" class="text-4xl md:text-6xl font-light tracking-tighter">שאלות ותשובות</h2>
         <span class="text-xs font-bold tracking-[0.2em] uppercase text-stone-600 mb-4 hidden md:block" aria-hidden="true">
           Q&A
         </span>
@@ -647,7 +692,7 @@ const faqs = [
         <p class="text-sm font-bold tracking-[0.3em] uppercase text-stone-300 mb-8">Get in Touch</p>
         <h2
           id="contact-heading"
-          class="text-white text-5xl md:text-7xl font-light tracking-tighter mb-16 leading-tight font-cardo"
+          class="text-white text-4xl md:text-6xl font-light tracking-tighter mb-16 leading-tight font-cardo"
         >
           יש לכם פרויקט?<br />בואו נדבר.
         </h2>
@@ -807,6 +852,49 @@ const faqs = [
       transform: translateY(0);
     }
   }
+
+  .arch-caption {
+    opacity: 0;
+    transform: translateY(6px);
+    transition:
+      opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.2s,
+      transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+  }
+
+  .kitchen-sketch :global(.k-stroke) {
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .kitchen-reveal.is-drawing :global(.k-stroke) {
+    clip-path: inset(0 0 0 0);
+  }
+
+  .kitchen-sketch :global(.k-stroke[data-k-type="large"]) {
+    clip-path: none;
+    opacity: 0;
+    transition: opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .kitchen-reveal.is-drawing :global(.k-stroke[data-k-type="large"]) {
+    opacity: 1;
+  }
+
+  .kitchen-reveal.is-drawing .arch-caption {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .kitchen-sketch :global(.k-stroke),
+    .arch-caption {
+      transition: none !important;
+    }
+    .kitchen-sketch :global(.k-stroke) {
+      clip-path: inset(0) !important;
+      opacity: 1 !important;
+    }
+  }
 </style>
 
 <script>
@@ -825,4 +913,44 @@ const faqs = [
       { passive: true },
     );
   }
+
+
+  const kitchenReveals = document.querySelectorAll<HTMLElement>('.kitchen-reveal');
+  kitchenReveals.forEach((section) => {
+    const strokes = section.querySelectorAll<SVGPathElement>('.k-stroke');
+    if (!strokes.length) return;
+
+    const largeAreaThreshold = 150000;
+    const stagger = 0.09;
+    strokes.forEach((el, i) => {
+      el.style.transitionDelay = `${(i * stagger).toFixed(2)}s`;
+      try {
+        const bbox = el.getBBox();
+        if (bbox.width * bbox.height > largeAreaThreshold) {
+          el.dataset.kType = 'large';
+        }
+      } catch {}
+    });
+
+    if (prefersReducedMotion) {
+      section.classList.add('is-drawing');
+      strokes.forEach((el) => {
+        el.style.transitionDelay = '0s';
+      });
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          section.classList.add('is-drawing');
+          observer.unobserve(section);
+        });
+      },
+      { threshold: 0.18 },
+    );
+
+    observer.observe(section);
+  });
 </script>
