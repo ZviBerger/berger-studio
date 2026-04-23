@@ -99,10 +99,16 @@ const testimonials = [
 
             <h1
               id="hero-title"
-              class="text-white text-7xl md:text-[13vw] leading-[0.78] md:leading-[0.75] font-bold tracking-tighter reveal-text"
+              class="text-white/80 text-7xl md:text-[13vw] leading-[0.78] md:leading-[0.75] font-bold tracking-tighter reveal-text flex items-center gap-4 md:gap-8"
               style="animation-delay: 0.4s"
             >
-              Alma.
+              <img
+                src="/hero-logo.svg"
+                alt=""
+                aria-hidden="true"
+                class="h-[0.8em] w-auto object-contain opacity-100"
+              />
+              <span>Alma</span>
             </h1>
 
             <p
@@ -130,9 +136,15 @@ const testimonials = [
               </p>
               <h2
                 id="portfolio-heading"
-                class="text-5xl md:text-9xl font-light tracking-tighter text-black"
+                class="text-5xl md:text-9xl font-light tracking-tighter text-black flex items-center gap-4"
               >
-                Alma
+                <img
+                  src="/alma-logo.svg"
+                  alt=""
+                  aria-hidden="true"
+                  class="h-[0.8em] w-auto object-contain"
+                />
+                <span>Alma</span>
               </h2>
             </div>
             <p class="max-w-md text-lg md:text-xl text-stone-600 font-light leading-relaxed">
@@ -684,7 +696,17 @@ const testimonials = [
   <footer
     class="bg-[#1a1a1a] text-stone-200 py-12 px-8 md:px-16 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-sm"
   >
-    <p>&copy; {new Date().getFullYear()} Alma. All rights reserved.</p>
+    <div class="flex items-center gap-3">
+      <img
+        src="/hero-logo.svg"
+        alt=""
+        aria-hidden="true"
+        class="h-6 w-6 object-contain"
+        loading="lazy"
+        decoding="async"
+      />
+      <p>&copy; {new Date().getFullYear()} Alma. All rights reserved.</p>
+    </div>
     <nav aria-label="Footer links">
       <ul class="flex flex-wrap justify-center gap-8" role="list">
         <li>

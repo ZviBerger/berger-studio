@@ -10,7 +10,17 @@ const basePath = isEnglish ? '/en' : '';
 <footer class="w-full py-12 px-6 md:px-12 border-t border-berger-brown/10 mt-auto">
   <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
     <div class="flex flex-col gap-2">
-      <h2 class="text-xl font-semibold">{isEnglish ? 'Alma' : 'עלמא'}</h2>
+      <div class="flex items-center gap-3" dir={isEnglish ? 'ltr' : 'rtl'}>
+        <img
+          src="/alma-logo.svg"
+          alt=""
+          aria-hidden="true"
+          class="h-8 w-8 object-contain"
+          loading="lazy"
+          decoding="async"
+        />
+        <h2 class="text-xl font-semibold">{isEnglish ? 'Alma' : 'עלמא'}</h2>
+      </div>
       <p class="text-sm text-stone-700">{isEnglish ? 'Architecture & Interior Design' : 'אדריכלות ועיצוב פנים'}</p>
     </div>
 
@@ -31,7 +41,7 @@ const basePath = isEnglish ? '/en' : '';
     </nav>
 
     <div class="text-sm text-stone-600">
-      &copy; {year} {isEnglish ? 'Alma. All rights reserved.' : 'עלמא. כל הזכויות שמורות.'}
+      &copy; {year} {isEnglish ? 'Alma. All rights reserved.' : 'עלמא כל הזכויות שמורות.'}
     </div>
   </div>
 </footer>

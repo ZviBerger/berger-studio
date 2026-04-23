@@ -20,7 +20,7 @@ const openMenuLabel = isEnglish ? 'Open main menu' : 'פתיחת תפריט רא
 const openMenuText = isEnglish ? 'Open menu' : 'פתיחת תפריט';
 const mobileNavLabel = isEnglish ? 'Mobile navigation' : 'ניווט נייד';
 const closeMenuLabel = isEnglish ? 'Close main menu' : 'סגירת תפריט ראשי';
-const brandLabel = isEnglish ? 'Alma.' : 'עלמא.';
+const brandLabel = isEnglish ? 'alma' : 'עלמא';
 ---
 
 <nav
@@ -34,8 +34,17 @@ const brandLabel = isEnglish ? 'Alma.' : 'עלמא.';
     aria-label={backToTopLabel}
     id="navbar-logo"
   >
-    <div class="flex items-center" dir={isEnglish ? 'ltr' : 'rtl'}>
-      <div class="text-3xl font-bold tracking-tighter font-cardo">{brandLabel}</div>
+    <div class="flex items-center gap-3" dir={isEnglish ? 'ltr' : 'rtl'}>
+      <img
+        id="nav-logo-img"
+        src="/hero-logo.svg"
+        alt=""
+        aria-hidden="true"
+        class="h-10 w-10 object-contain transition-all duration-500"
+        loading="eager"
+        decoding="async"
+      />
+      <div class={`text-3xl font-bold tracking-tighter font-cardo ${isEnglish ? 'lowercase' : ''}`}>{brandLabel}</div>
     </div>
   </a>
 
@@ -191,6 +200,7 @@ const brandLabel = isEnglish ? 'Alma.' : 'עלמא.';
     () => {
       const nav = document.getElementById('navbar');
       const logo = document.getElementById('navbar-logo');
+      const logoImg = document.getElementById('nav-logo-img');
       const isMobile = window.innerWidth < 768;
       if (!nav || isOpen) {
         return;
@@ -199,12 +209,14 @@ const brandLabel = isEnglish ? 'Alma.' : 'עלמא.';
       if (window.scrollY > window.innerHeight - 80) {
         nav.classList.add('py-4', 'bg-white', 'text-black');
         nav.classList.remove('py-6', 'text-white');
+        logoImg?.classList.add('invert');
         if (isMobile) {
           logo?.classList.remove('opacity-0', 'pointer-events-none');
         }
       } else {
         nav.classList.add('py-6', 'text-white');
         nav.classList.remove('py-4', 'bg-white', 'text-black');
+        logoImg?.classList.remove('invert');
         if (isMobile && homePaths.includes(window.location.pathname)) {
           logo?.classList.add('opacity-0', 'pointer-events-none');
         }
