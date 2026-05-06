@@ -1,0 +1,120 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import QuestionnaireForm from '../../components/forms/QuestionnaireForm';
+import { formSlugs, getFormBySlug } from '../../forms';
+import { getLocaleFromPath } from '../../utils/i18n';
+
+export const getStaticPaths = () =>
+  formSlugs.map((slug) => ({
+    params: { slug },
+  }));
+
+const { slug } = Astro.params;
+const form = slug ? getFormBySlug(slug) : undefined;
+
+if (!form) {
+  return Astro.redirect('/');
+}
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const isEnglish = locale === 'en';
+const basePath = isEnglish ? '/en' : '';
+const homeHref = `${basePath}/#home`;
+const brandLabel = isEnglish ? 'alma' : 'עלמא';
+const logoAriaLabel = isEnglish ? 'Alma - back to top' : 'עלמא - חזרה לתחילת העמוד';
+const heroImgAlt = isEnglish
+  ? 'A monochromatic living room in soft tones with a built-in bench, tall windows, wooden shelves, and a woman seated by the window.'
+  : 'סלון מונוכרומטי בגוונים רכים עם ספסל בנוי, חלונות גבוהים, מדפי עץ ואישה יושבת ליד החלון.';
+const formLocale = isEnglish ? 'en' : 'he';
+---
+
+<Layout title={`${form.title} | עלמא`} description={form.intro}>
+  <main id="main-content" tabindex="-1" class="min-h-screen bg-[#f6f4f1] text-black">
+    <section
+      class="relative w-full min-h-[40vh] overflow-hidden md:min-h-[46vh]"
+      aria-labelledby="form-hero-heading"
+    >
+      <div class="absolute inset-0">
+        <div
+          id="form-hero-parallax"
+          class="absolute inset-0 h-[115%] -top-[15%] w-full will-change-transform"
+        >
+          <img
+            src="/hero-new.jpg"
+            alt={heroImgAlt}
+            class="h-full w-full object-cover object-[center_65%] alma-animate-ken-burns grayscale saturate-0 contrast-110 brightness-90"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+        <div class="pointer-events-none absolute inset-0 bg-black/25" aria-hidden="true"></div>
+        <div
+          class="pointer-events-none absolute inset-x-0 bottom-0 h-[min(75%,20rem)] bg-gradient-to-t from-black/70 via-black/45 to-transparent md:h-[min(85%,24rem)]"
+          aria-hidden="true"
+        ></div>
+      </div>
+
+      <a
+        href={homeHref}
+        class="absolute top-5 right-5 z-20 text-white transition-opacity hover:opacity-85 md:top-8 md:right-8"
+        aria-label={logoAriaLabel}
+      >
+        <div class="flex items-center gap-3 drop-shadow-md" dir={isEnglish ? 'ltr' : 'rtl'}>
+          <img
+            src="/alma-logo.svg"
+            alt=""
+            aria-hidden="true"
+            class="h-9 w-9 object-contain brightness-0 invert"
+            loading="eager"
+            decoding="async"
+          />
+          <div class={`text-2xl font-bold tracking-tighter font-cardo text-white ${isEnglish ? 'lowercase' : ''}`}>
+            {brandLabel}
+          </div>
+        </div>
+      </a>
+
+      <div class="relative z-10 flex min-h-[40vh] flex-col justify-start px-6 pb-8 pt-28 md:min-h-[46vh] md:px-10 md:pb-10 md:pt-32">
+        <div
+          class={`mx-auto w-full max-w-4xl ${isEnglish ? 'text-left' : 'text-right'}`}
+          dir={isEnglish ? 'ltr' : 'rtl'}
+        >
+          <h1
+            id="form-hero-heading"
+            class="mb-5 text-4xl font-light tracking-tight text-white [text-shadow:0_2px_28px_rgba(0,0,0,0.4)] md:mb-6 md:text-5xl lg:text-6xl"
+          >
+            {form.title}
+          </h1>
+          <p
+            class="max-w-3xl text-xl font-normal leading-relaxed text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.95),0_2px_24px_rgba(0,0,0,0.75),0_0_1px_rgba(0,0,0,1)] md:text-2xl lg:text-3xl"
+          >
+            {form.intro}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="px-6 py-10 md:px-10 md:py-16">
+      <QuestionnaireForm form={form} locale={formLocale} client:load />
+    </div>
+  </main>
+</Layout>
+
+<script>
+  const formHeroBg = document.getElementById('form-hero-parallax');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (formHeroBg && !reduceMotion) {
+    window.addEventListener(
+      'scroll',
+      () => {
+        const y = window.scrollY;
+        const limit = window.innerHeight;
+        if (y < limit) {
+          formHeroBg.style.transform = `translateY(${y * 0.12}px)`;
+        }
+      },
+      { passive: true },
+    );
+  }
+</script>

@@ -3,7 +3,7 @@
 @theme {
   --color-berger-brown: #504239;
   --font-cardo: "Cardo", serif;
-  --font-heebo: "Heebo", sans-serif;
+  --font-heebo: "Assistant", sans-serif;
 }
 
 @layer base {
@@ -72,6 +72,32 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+@keyframes alma-ken-burns {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
+
+.alma-animate-ken-burns {
+  animation: alma-ken-burns 30s ease-out infinite alternate;
+}
+
+@keyframes alma-hero-reveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.alma-hero-reveal-text {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: alma-hero-reveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .asw-container .asw-menu-btn {
