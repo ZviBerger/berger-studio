@@ -74,16 +74,51 @@ const testimonials = [
 
   <main id="main-content" tabindex="-1" class="bg-white text-black">
     <section id="home" class="relative min-h-screen w-full overflow-hidden" aria-labelledby="hero-title">
-      <h1 id="hero-title" class="sr-only">Alma — architecture between people and place</h1>
       <div class="absolute inset-0">
         <div id="parallax-bg" class="absolute inset-0 h-[115%] -top-[15%] w-full will-change-transform">
           <img
             src="/hero-new.jpg"
             alt="A monochromatic living room in soft tones with a built-in bench, tall windows, wooden shelves, and a woman seated by the window."
-            class="w-full h-full object-cover object-[center_65%] alma-animate-ken-burns grayscale saturate-0 contrast-110 brightness-90"
+            class="w-full h-full object-cover object-[center_65%] animate-ken-burns grayscale saturate-0 contrast-110 brightness-90"
           />
         </div>
         <div class="absolute inset-0 bg-black/20 pointer-events-none" aria-hidden="true"></div>
+      </div>
+
+      <div class="relative z-10 min-h-screen flex flex-col p-8 md:p-16 pb-12">
+        <div class="max-w-[90vw] flex-1 flex flex-col justify-center md:justify-start md:pt-[14vh]">
+          <div class="text-white">
+            <div
+              class="flex flex-wrap items-baseline gap-x-6 md:gap-x-12 text-3xl md:text-5xl lg:text-6xl font-light opacity-90 mb-8 md:mb-20 font-cardo"
+              aria-label="Material, meaning, form"
+            >
+              <span class="reveal-text" style="animation-delay: 0.1s">Material.</span>
+              <span class="reveal-text" style="animation-delay: 0.2s">Meaning.</span>
+              <span class="reveal-text" style="animation-delay: 0.3s">Form.</span>
+            </div>
+
+            <h1
+              id="hero-title"
+              class="text-white/80 text-7xl md:text-[13vw] leading-[0.78] md:leading-[0.75] font-bold tracking-tighter reveal-text flex items-center gap-4 md:gap-8"
+              style="animation-delay: 0.4s"
+            >
+              <img
+                src="/hero-logo.svg"
+                alt=""
+                aria-hidden="true"
+                class="h-[0.8em] w-auto object-contain opacity-100"
+              />
+              <span>Alma</span>
+            </h1>
+
+            <p
+              class="text-lg md:text-3xl mt-8 md:mt-20 opacity-90 font-light tracking-[0.08em] reveal-text font-cardo"
+              style="animation-delay: 0.6s"
+            >
+              Architecture between people and place.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -694,6 +729,34 @@ const testimonials = [
     </nav>
   </footer>
 </Layout>
+
+<style>
+  @keyframes ken-burns {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.05);
+    }
+  }
+
+  .animate-ken-burns {
+    animation: ken-burns 30s ease-out infinite alternate;
+  }
+
+  .reveal-text {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: reveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes reveal {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
 
 <script>
   const heroBg = document.getElementById('parallax-bg');
