@@ -10,7 +10,7 @@ import type { FormDefinition, FormStep } from '../../forms/types';
 const FADE_MS = 200;
 const DEFAULT_STORAGE_VERSION = 1;
 const storageVersionByFormSlug: Record<string, number> = {
-  'renovation-program-he': 2,
+  'renovation-program-he': 3,
 };
 const storageKeyForForm = (slug: string) => `alma-questionnaire:${slug}:state`;
 const storageVersionForForm = (slug: string) => storageVersionByFormSlug[slug] ?? DEFAULT_STORAGE_VERSION;

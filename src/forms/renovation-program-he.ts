@@ -27,6 +27,19 @@ export const renovationProgramHeForm: FormDefinition = {
   successMessage:
     'תודה ששיתפתם. מתוך התשובות נוכל לדייק את התכנון, סדרי העדיפויות והדרך לבית שנכון לכם.',
   steps: withBrandIntro([
+    {
+      id: 'full_name',
+      type: 'text',
+      title: 'שם מלא',
+      required: true,
+    },
+    {
+      id: 'mobile',
+      type: 'text',
+      title: 'טלפון נייד',
+      required: true,
+      placeholder: '05X-XXXXXXX',
+    },
     sectionStep('about_you_section', 'קצת עליכם', 'הרכב משפחה ומקצב החיים בבית הנוכחי'),
     {
       id: 'rooms_count',
