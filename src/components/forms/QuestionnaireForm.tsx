@@ -8,6 +8,12 @@ import { buildHebrewQuestionnaireText } from '../../forms/questionnaireSubmissio
 import type { FormDefinition, FormStep } from '../../forms/types';
 
 const FADE_MS = 200;
+const DEFAULT_STORAGE_VERSION = 1;
+const storageVersionByFormSlug: Record<string, number> = {
+  'renovation-program-he': 2,
+};
+const storageKeyForForm = (slug: string) => `alma-questionnaire:${slug}:state`;
+const storageVersionForForm = (slug: string) => storageVersionByFormSlug[slug] ?? DEFAULT_STORAGE_VERSION;
 
 type FormProps = {
   form: FormDefinition;
@@ -16,6 +22,13 @@ type FormProps = {
 
 type FormAnswer = string | string[];
 type AnswersMap = Record<string, FormAnswer | undefined>;
+type SavedFormState = {
+  version: number;
+  formSlug: string;
+  currentStepId?: string;
+  index?: number;
+  answers: AnswersMap;
+};
 
 const isVisible = (step: FormStep, answers: AnswersMap): boolean => {
   if (!step.showWhen) {
@@ -50,6 +63,45 @@ const isAnswered = (step: FormStep, value: FormAnswer | undefined): boolean => {
   return typeof value === 'string' && value.trim().length > 0;
 };
 
+const isFormAnswer = (value: unknown): value is FormAnswer =>
+  typeof value === 'string' || (Array.isArray(value) && value.every((item) => typeof item === 'string'));
+
+const parseSavedFormState = (raw: string | null, form: FormDefinition): SavedFormState | null => {
+  if (!raw) {
+    return null;
+  }
+
+  try {
+    const parsed = JSON.parse(raw) as Partial<SavedFormState>;
+    if (
+      parsed.version !== storageVersionForForm(form.slug) ||
+      parsed.formSlug !== form.slug ||
+      !parsed.answers ||
+      typeof parsed.answers !== 'object'
+    ) {
+      return null;
+    }
+
+    const validStepIds = new Set(form.steps.map((step) => step.id));
+    const answers = Object.entries(parsed.answers).reduce<AnswersMap>((acc, [stepId, value]) => {
+      if (validStepIds.has(stepId) && isFormAnswer(value)) {
+        acc[stepId] = value;
+      }
+      return acc;
+    }, {});
+
+    return {
+      version: storageVersionForForm(form.slug),
+      formSlug: form.slug,
+      currentStepId: typeof parsed.currentStepId === 'string' ? parsed.currentStepId : undefined,
+      index: typeof parsed.index === 'number' ? parsed.index : undefined,
+      answers,
+    };
+  } catch {
+    return null;
+  }
+};
+
 const QuestionnaireForm = ({ form, locale = 'he' }: FormProps) => {
   const hostProfile = questionnaireHostProfileByLocale[locale];
   const [answers, setAnswers] = useState<AnswersMap>({});
@@ -60,6 +112,7 @@ const QuestionnaireForm = ({ form, locale = 'he' }: FormProps) => {
   const [transitioningStepId, setTransitioningStepId] = useState('');
   const [displayedStep, setDisplayedStep] = useState<FormStep | null>(null);
   const [contentOpacity, setContentOpacity] = useState(1);
+  const [hasLoadedSavedState, setHasLoadedSavedState] = useState(false);
   const displayedIdRef = useRef<string | null>(null);
 
   const visibleSteps = useMemo(
@@ -75,6 +128,42 @@ const QuestionnaireForm = ({ form, locale = 'he' }: FormProps) => {
   const progress = visibleSteps.length > 0 ? Math.round(((safeIndex + 1) / visibleSteps.length) * 100) : 0;
   const navLocked =
     !!currentStep && !!displayedStep && displayedStep.id !== currentStep.id;
+
+  useEffect(() => {
+    const savedState = parseSavedFormState(window.localStorage.getItem(storageKeyForForm(form.slug)), form);
+
+    if (savedState) {
+      const savedVisibleSteps = form.steps.filter((step) => isVisible(step, savedState.answers));
+      const savedStepIndex = savedState.currentStepId
+        ? savedVisibleSteps.findIndex((step) => step.id === savedState.currentStepId)
+        : -1;
+      const fallbackIndex =
+        typeof savedState.index === 'number'
+          ? Math.min(Math.max(savedState.index, 0), Math.max(savedVisibleSteps.length - 1, 0))
+          : 0;
+
+      setAnswers(savedState.answers);
+      setIndex(savedStepIndex >= 0 ? savedStepIndex : fallbackIndex);
+    }
+
+    setHasLoadedSavedState(true);
+  }, [form]);
+
+  useEffect(() => {
+    if (!hasLoadedSavedState || !currentStep) {
+      return;
+    }
+
+    const stateToSave: SavedFormState = {
+      version: storageVersionForForm(form.slug),
+      formSlug: form.slug,
+      currentStepId: currentStep.id,
+      index: safeIndex,
+      answers,
+    };
+
+    window.localStorage.setItem(storageKeyForForm(form.slug), JSON.stringify(stateToSave));
+  }, [answers, currentStep, form.slug, hasLoadedSavedState, safeIndex]);
 
   useEffect(() => {
     if (!currentStep) {

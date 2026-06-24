@@ -77,10 +77,29 @@ const resolvedOgImageMimeType = ogImage === defaultOgImage ? 'image/jpeg' : ogIm
 			href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600&family=Cardo:ital,wght@0,400;0,700;1,400&display=swap"
 			rel="stylesheet"
 		/>
-		<script
-			src="https://cdn.jsdelivr.net/npm/sienna-accessibility@latest/dist/sienna-accessibility.umd.js"
-			defer
-		></script>
+		<script>
+			const loadAccessibilityWidget = () => {
+				if (document.querySelector('script[data-alma-accessibility]')) {
+					return;
+				}
+
+				const script = document.createElement('script');
+				script.src = 'https://cdn.jsdelivr.net/npm/sienna-accessibility@latest/dist/sienna-accessibility.umd.js';
+				script.defer = true;
+				script.dataset.almaAccessibility = 'true';
+				document.head.appendChild(script);
+			};
+
+			const loadAccessibilityWidgetDelay = 1500;
+
+			if (document.readyState === 'complete') {
+				window.setTimeout(loadAccessibilityWidget, loadAccessibilityWidgetDelay);
+			} else {
+				window.addEventListener('load', () => window.setTimeout(loadAccessibilityWidget, loadAccessibilityWidgetDelay), {
+					once: true,
+				});
+			}
+		</script>
 
 		<title>{title}</title>
 	</head>

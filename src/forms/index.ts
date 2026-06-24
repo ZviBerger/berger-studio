@@ -1,7 +1,8 @@
 import { intakeHeForm } from './intake-he';
+import { renovationProgramHeForm } from './renovation-program-he';
 import type { FormDefinition } from './types';
 
-const forms: FormDefinition[] = [intakeHeForm];
+const forms: FormDefinition[] = [intakeHeForm, renovationProgramHeForm];
 
 export const formSlugs = forms.map((form) => form.slug);
 

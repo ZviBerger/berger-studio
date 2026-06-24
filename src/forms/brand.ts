@@ -36,7 +36,7 @@ const brandIntroSteps: FormStep[] = [
     id: QUESTIONNAIRE_WELCOME_STEP_ID,
     type: 'single',
     title: 'ברוכים הבאים לעלמא',
-    description: 'השאלון הקצר יעזור לי להכיר אתכם טוב יותר ולהכין פגישה מדויקת.',
+    description: 'השאלון יעזור לי להכיר אתכם טוב יותר ולהכין פגישה מדויקת.',
     required: true,
     options: [{ value: 'continue', label: 'התחלה' }],
   },
